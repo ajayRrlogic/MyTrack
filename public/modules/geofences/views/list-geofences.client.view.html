@@ -1,0 +1,45 @@
+
+
+<section data-ng-controller="GeofencesController" data-ng-init="find()">
+
+    <div id="map_canvas" ng-controller="mapCtrl" >
+
+    <script type="text/ng-template" id="control.refresh.html">
+    <button type="button" class="btn btn-success" ng-click="refreshMap()">Refresh Map</button>
+
+ </script>
+ <script type="text/ng-template" id="control.list.html">
+
+     <button type="button" class="btn btn-success" ng-click="saveGeofences()">Save Geofences</button>
+
+</script>
+
+
+
+
+      <ui-gmap-google-map center="map.center"
+      options="map.options"
+      zoom="map.zoom"
+      events="map.events"
+      pan="true"
+      control="map.control">
+
+        <ui-gmap-drawing-manager options="drawingManagerOptions"
+        control="drawingManagerControl"
+        events="eventHandler">
+
+        </ui-gmap-drawing-manager>
+
+        <ui-gmap-map-control template="control.refresh.html"
+        position="top-left"  controller="templateCtrl" index="1"></ui-gmap-map-control>
+          <ui-gmap-map-control template="control.list.html"
+          position="top-left" controller="templateCtrl" index="1"></ui-gmap-map-control>
+
+      </ui-gmap-google-map>
+
+
+
+
+  </div>
+
+</section>
