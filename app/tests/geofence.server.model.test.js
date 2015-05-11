@@ -27,9 +27,13 @@ describe('Geofence Model Unit Tests:', function() {
 			password: 'password'
 		});
 
-		user.save(function() { 
+		user.save(function() {
 			geofence = new Geofence({
 				name: 'Geofence Name',
+				loc:{ type: 'Polygon',
+    coordinates: [
+      [ [ 100.0 , 0.0 ] , [ 101.0 , 0.0 ] , [ 101.0 , 1.0 ] , [ 100.0 , 1.0 ] , [ 100.0 , 0.0 ] ]]
+		},
 				user: user
 			});
 
@@ -45,7 +49,7 @@ describe('Geofence Model Unit Tests:', function() {
 			});
 		});
 
-		it('should be able to show an error when try to save without name', function(done) { 
+		it('should be able to show an error when try to save without name', function(done) {
 			geofence.name = '';
 
 			return geofence.save(function(err) {
@@ -55,7 +59,7 @@ describe('Geofence Model Unit Tests:', function() {
 		});
 	});
 
-	afterEach(function(done) { 
+	afterEach(function(done) {
 		Geofence.remove().exec();
 		User.remove().exec();
 

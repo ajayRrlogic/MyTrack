@@ -38,7 +38,11 @@ describe('Geofence CRUD tests', function() {
 		// Save a user to the test db and create new Geofence
 		user.save(function() {
 			geofence = {
-				name: 'Geofence Name'
+				name: 'Geofence Name',
+				loc:{ type: 'Polygon',
+    coordinates: [
+      [ [ 100.0 , 0.0 ] , [ 101.0 , 0.0 ] , [ 101.0 , 1.0 ] , [ 100.0 , 1.0 ] , [ 100.0 , 0.0 ] ]]
+		}
 			};
 
 			done();
@@ -115,7 +119,7 @@ describe('Geofence CRUD tests', function() {
 					.end(function(geofenceSaveErr, geofenceSaveRes) {
 						// Set message assertion
 						(geofenceSaveRes.body.message).should.match('Please fill Geofence name');
-						
+
 						// Handle Geofence save error
 						done(geofenceSaveErr);
 					});
@@ -238,7 +242,7 @@ describe('Geofence CRUD tests', function() {
 	});
 
 	it('should not be able to delete Geofence instance if not signed in', function(done) {
-		// Set Geofence user 
+		// Set Geofence user
 		geofence.user = user;
 
 		// Create new Geofence model instance

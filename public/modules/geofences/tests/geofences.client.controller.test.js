@@ -93,7 +93,11 @@
 		it('$scope.create() with valid form data should send a POST request with the form input values and then locate to new object URL', inject(function(Geofences) {
 			// Create a sample Geofence object
 			var sampleGeofencePostData = new Geofences({
-				name: 'New Geofence'
+				name: 'New Geofence',
+				loc:{ type: 'Polygon',
+    coordinates: [
+      [ [ 100.0 , 0.0 ] , [ 101.0 , 0.0 ] , [ 101.0 , 1.0 ] , [ 100.0 , 1.0 ] , [ 100.0 , 0.0 ] ]]
+		}
 			});
 
 			// Create a sample Geofence response

@@ -16,6 +16,11 @@ var GeofenceSchema = new Schema({
 		required: 'Please fill Geofence name',
 		trim: true
 	},
+  loc: {
+			type: Object,
+			index: '2dsphere',
+			required: true
+	},
 	created: {
 		type: Date,
 		default: Date.now

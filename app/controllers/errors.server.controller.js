@@ -30,7 +30,7 @@ exports.getErrorMessage = function(err) {
 				message = getUniqueErrorMessage(err);
 				break;
 			default:
-				message = 'Something went wrong';
+				message = getUniqueErrorMessage(err) + err.code;
 		}
 	} else {
 		for (var errName in err.errors) {

@@ -23,12 +23,3 @@ angular.module('geofences').config(['$stateProvider',
 		});
 	}
 ]);
-
-
-angular.module('geofences').config(['uiGmapGoogleMapApiProvider',function(uiGmapGoogleMapApiProvider) {
-    uiGmapGoogleMapApiProvider.configure({
-           key: 'AIzaSyDy9J9_DFi-O539N0iBIKY37V-hRlDvlj8',
-        v: '3.17',
-        libraries: 'weather,geometry,visualization,drawing'
-    });
-}]);

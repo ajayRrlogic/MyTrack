@@ -11,24 +11,3 @@ angular.module('geofences').factory('Geofences', ['$resource',
 		});
 	}
 ]);
-
-angular.module('geofences').factory('GeoFencesService', function(){
-
-  /*
-  geoFenceObject = {
-    name:'name of geofence',
-    vertices:[]
-       latlong.lat
-       latlong.lng
-}
-  */
-  var geoFencesObject = {};
-
-  geoFencesObject.list = [];
-
-	geoFencesObject.add = function(oneGeoFence){
-		geoFencesObject.list.push({id: geoFencesObject.list.length, oneGeo: oneGeoFence});
-  };
-
-  return geoFencesObject;
-});
