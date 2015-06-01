@@ -1,3 +1,4 @@
 .angular-google-map-container {
   height: 500px; // Or whatever pixel value you require :)
+  width: 200px;
 }

@@ -74,12 +74,15 @@ exports.delete = function(req, res) {
  * List of Geofences
  */
 exports.list = function(req, res) {
-	Geofence.find().sort('-created').populate('user', 'displayName').exec(function(err, geofences) {
+	Geofence.find(
+		{'user':req.user}
+	).sort('-created').exec(function(err, geofences) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
+			console.log(geofences);
 			res.jsonp(geofences);
 		}
 	});
@@ -89,10 +92,15 @@ exports.list = function(req, res) {
  * Geofence middleware
  */
 exports.geofenceByID = function(req, res, next, id) {
-	Geofence.findById(id).populate('user', 'displayName').exec(function(err, geofence) {
-		if (err) return next(err);
+	Geofence.findById(id).exec(function(err, geofence) {
+		if (err)
+		{
+			console.log(err);
+			return next(err);
+	  }
 		if (! geofence) return next(new Error('Failed to load Geofence ' + id));
 		req.geofence = geofence ;
+
 		next();
 	});
 };
@@ -101,7 +109,13 @@ exports.geofenceByID = function(req, res, next, id) {
  * Geofence authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
-	if (req.geofence.user.id !== req.user.id) {
+	console.log('authorization');
+	console.log(req.geofence.user);
+	console.log(req.user.id);
+	if (req.geofence.user != req.user.id) {
+		console.log('authorization');
+		console.log(req.geofence.user);
+		console.log(req.user.id);
 		return res.status(403).send('User is not authorized');
 	}
 	next();

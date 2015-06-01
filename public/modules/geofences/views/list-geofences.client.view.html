@@ -1,16 +1,21 @@
 
 
-<section data-ng-controller="GeofencesController" data-ng-init="find()">
+<section data-ng-controller="templateCtrl" data-ng-init="find()">
 
     <div id="map_canvas" ng-controller="mapCtrl" >
 
-    <script type="text/ng-template" id="control.refresh.html">
-    <button type="button" class="btn btn-success" ng-click="refreshMap()">Refresh Map</button>
+    <script type="text/ng-template" id="control.delete.html">
+
+    <div>
+    <button type="button" class="btn btn-success btn-md" ng-click="saveGeofences()">Save  </button>
+    </div>
 
  </script>
+
+
  <script type="text/ng-template" id="control.list.html">
 
-     <button type="button" class="btn btn-success" ng-click="saveGeofences()">Save Geofences</button>
+     <button type="button" class="btn btn-success btn-md" ng-click="saveGeofences()">Save  </button>
 
 </script>
 
@@ -30,13 +35,34 @@
 
         </ui-gmap-drawing-manager>
 
-        <ui-gmap-map-control template="control.refresh.html"
-        position="top-left"  controller="templateCtrl" index="1"></ui-gmap-map-control>
-          <ui-gmap-map-control template="control.list.html"
-          position="top-left" controller="templateCtrl" index="1"></ui-gmap-map-control>
 
-          <ui-gmap-polygon static="true" ng-repeat="p in polygons track by p._id" path="p.loc" stroke="p.stroke" visible="p.visible"
-                   geodesic="p.geodesic" fill="p.fill" fit="false" editable="p.editable" draggable="p.draggable"></ui-gmap-polygon>
+
+
+          <ui-gmap-map-control template="control.delete.html"
+          position="top-left"  controller="templateCtrl" index="1"></ui-gmap-map-control>
+
+
+                   <ui-gmap-polygons
+                             models="polygons"
+                             idKey="'name'"
+                             static="true"
+                             control="polyControl"
+                             path="'loc'"
+                             stroke="{color: '#000000', weight: 1, opacity: 0.5}"
+                             visible="true"
+                             clickable="true"
+                             geodesic="true"
+                             fill="{color: '#0080bc', opacity: 0.5}"
+                             fit="false"
+                             editable="false"
+                             events="poygonEvents"
+                             draggable="false"
+                             chunk="100"
+                             cleanchunk="200">
+         </ui-gmap-polygon>
+
+
+
       </ui-gmap-google-map>
 
 
